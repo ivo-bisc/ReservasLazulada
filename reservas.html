@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condominio Lazulada - Reservas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+                <h1 style="margin-bottom: .25rem;">Gestión de Reservas</h1>
+                <p style="margin: 0;" class="muted">Cargá y administrá las reservas.</p>
+            </div>
+            <!-- Se eliminó el botón de inicio -->
+            <button id="btnTemaClaro" class="btn btn-secondary" type="button" style="margin-left:1rem;">Tema claro</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="card" style="margin-bottom: 1.25rem;">
+                <h2 style="margin-top: 0;">Nueva reserva</h2>
+                <form id="formReserva" class="form-grid" autocomplete="off">
+                    <div class="field">
+                        <label for="propiedad" class="label">Propiedad</label>
+                        <select id="propiedad" class="input select" required></select>
+                    </div>
+                    <div class="field">
+                        <label for="entrada" class="label">Fecha de entrada</label>
+                        <input id="entrada" class="input" type="date" required />
+                    </div>
+                    <div class="field">
+                        <label for="salida" class="label">Fecha de salida</label>
+                        <input id="salida" class="input" type="date" required />
+                    </div>
+                    <div class="field">
+                        <label for="huespedes" class="label">Huéspedes</label>
+                        <input id="huespedes" class="input" type="number" min="1" step="1" placeholder="Ej: 2" required />
+                    </div>
+                    <div class="field">
+                        <label for="monto" class="label">Monto a abonar</label>
+                        <input id="monto" class="input" type="number" min="0" step="0.01" placeholder="Ej: 150000" required />
+                    </div>
+                    <div class="field">
+                        <label for="medioPago" class="label">Medio de pago</label>
+                        <select id="medioPago" class="input select" required>
+                            <option value="EfectivoARS">Efectivo ARS</option>
+                            <option value="EfectivoUSD">Efectivo USD</option>
+                            <option value="Airbnb">AIRBNB</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Guardar reserva</button>
+                        <button type="reset" id="btnLimpiar" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card">
+                <div style="display:flex; align-items:center; justify-content: space-between; gap:1rem; flex-wrap: wrap;">
+                    <h2 style="margin: 0;">Listado de reservas</h2>
+                    <div style="display:flex; gap:.5rem; align-items:center;">
+                        <label for="filtroPropiedad" class="label" style="margin:0;">Filtrar por propiedad:</label>
+                        <select id="filtroPropiedad" class="input select"></select>
+                        <button id="btnExportar" class="btn btn-secondary" type="button">Exportar CSV</button>
+                        <button id="btnBorrarTodo" class="btn btn-danger" type="button">Borrar todo</button>
+                    </div>
+                </div>
+                <div style="overflow: auto; margin-top: .75rem;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Propiedad</th>
+                                <th>Entrada</th>
+                                <th>Salida</th>
+                                <th>Noches</th>
+                                <th>Huéspedes</th>
+                                <th>Monto</th>
+                                <th>Medio de pago</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyReservas"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <small>Gestión de Reservas • Guardado local en tu navegador</small>
+        </div>
+    </footer>
+
+    <script src="./reservas.js" defer></script>
+    <script>
+        document.getElementById('btnTemaClaro').addEventListener('click', function() {
+            document.body.classList.toggle('light-theme');
+        });
+    </script>
+</body>
+</html>
+
+<style>
+body.light-theme {
+    background: #f9f9f9;
+    color: #222;
+}
+body.light-theme .card {
+    background: #fff;
+    border-color: #e0e0e0;
+}
+body.light-theme .header,
+body.light-theme .footer {
+    background: #eaf2fb;
+    color: #222;
+}
+/* Agrega más estilos según lo necesites */
+</style>
+
