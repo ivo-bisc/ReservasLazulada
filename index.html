@@ -105,6 +105,31 @@
             document.body.classList.toggle('light-theme');
         });
     </script>
+    <button class="theme-toggle" id="themeToggle" title="Cambiar modo">🌙 Modo oscuro</button>
+<script>
+  const btn = document.getElementById('themeToggle');
+  const body = document.body;
+  function setTheme(dark) {
+    if (dark) {
+      body.classList.add('dark');
+      btn.textContent = '☀️ Modo claro';
+      btn.title = 'Cambiar a modo claro';
+    } else {
+      body.classList.remove('dark');
+      btn.textContent = '🌙 Modo oscuro';
+      btn.title = 'Cambiar a modo oscuro';
+    }
+  }
+  // Guardar preferencia en localStorage
+  btn.onclick = () => {
+    const dark = !body.classList.contains('dark');
+    setTheme(dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  };
+  // Al iniciar, aplicar preferencia guardada
+  const saved = localStorage.getItem('theme');
+  setTheme(saved === 'dark');
+</script>
 </body>
 </html>
 
